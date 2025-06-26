@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { INote } from "../interfaces/notes.interfaces";
 
 const noteSchema = new Schema(
   {
@@ -21,7 +22,7 @@ const userSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 export const userNote = mongoose.model("userNote", userSchema);
-const appSchema = new Schema(
+const appSchema = new Schema<INote>(
   {
     title: { type: String, required: true, trim: true },
     content: { type: String, default: "" },
