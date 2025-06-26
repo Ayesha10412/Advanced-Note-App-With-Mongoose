@@ -9,7 +9,7 @@ async function main(){
     await mongoose.connect('mongodb+srv://Practice:JbSutunp5HzJndRr@cluster0.i7pwp.mongodb.net/advanced-note-app?retryWrites=true&w=majority&appName=Cluster0');
     console.log("Connecting to mongodb using mongoose.")
 server =app.listen(Port,()=>{
-    console.log(`App is listening on port6 ${Port}`)
+    console.log(`App is listening on port ${Port}`)
 })
     }catch(error){
         console.log(error);
