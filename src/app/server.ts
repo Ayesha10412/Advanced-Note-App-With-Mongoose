@@ -6,7 +6,7 @@ let server:Server ;
 const Port =5000;
 async function main(){
     try{
-    await mongoose.connect('mongodb+srv://Practice:JbSutunp5HzJndRr@cluster0.i7pwp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+    await mongoose.connect('mongodb+srv://Practice:JbSutunp5HzJndRr@cluster0.i7pwp.mongodb.net/advanced-note-app?retryWrites=true&w=majority&appName=Cluster0');
     console.log("Connecting to mongodb using mongoose.")
 server =app.listen(Port,()=>{
     console.log(`App is listening on port6 ${Port}`)
