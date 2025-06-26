@@ -1,7 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import mongoose, { Schema } from "mongoose";
 const app:Application=express();
-
+app.use(express.json())
 const noteSchema=new Schema({
     title:String,
     content:String
@@ -57,9 +57,11 @@ tags:{
     label:{type:String,required:true},
     color:{type:String,default:'Green'}
 }
+
 })
 const appNoteSchema=mongoose.model("appNoteSchema",appSchema)
 app.post('/create-advanced-note',async(req:Request,res:Response)=>{
+    //approach1
     const advancedNote = new appNoteSchema({
         title:"Learning Node",
         tags:{
@@ -71,6 +73,28 @@ app.post('/create-advanced-note',async(req:Request,res:Response)=>{
         success:true,message:"Advanced note created successfully.",note:advancedNote
     })
 })
+app.post('/note/create-advanced-note',async(req:Request,res:Response)=>{
+    const body=req.body;
+    const note = await appNoteSchema.create(body)
+    res.status(201).json({
+        success:true,message:"Advanced note created successfully.",note:note
+    })
+})
+app.get('/notes',async(req:Request,res:Response)=>{
+    const notes = await appNoteSchema.find();
+ res.status(201).json({
+        success:true,message:"Advanced note created successfully.",note:notes
+    })})
+
+app.get('/notes/:noteId',async(req:Request,res:Response)=>{
+    const noteId = req.params.noteId
+    // const note= await appNoteSchema.findById(noteId)
+    const note =await appNoteSchema.findOne({_id:noteId})
+     res.status(201).json({
+        success:true,message:"Advanced note created successfully.",note
+    })
+
+})    
 
 app.get('/',(req:Request,res:Response)=>{
     res.send('Welcome to Note App!')
