@@ -19,7 +19,7 @@ const CreateUserZodSchema = z.object({
 userRoutes.post("/create-user", async (req: Request, res: Response) => {
   try {
     const body = await CreateUserZodSchema.parseAsync(req.body);
-    console.log(body, "Zod Body");
+    // console.log(body, "Zod Body");
     const user = await User.create(body);
     res
       .status(201)
@@ -38,9 +38,11 @@ userRoutes.get("/", async (req: Request, res: Response) => {
 userRoutes.get("/:userId", async (req: Request, res: Response) => {
   const userId = req.params.userId;
   const user = await User.find({ _id: userId });
-  res
-    .status(201)
-    .json({ success: true, message: "User created Successfully", user });
+  res.status(201).json({
+    success: true,
+    message: "User created Successfully",
+    user,
+  });
 });
 userRoutes.patch("/:userId", async (req: Request, res: Response) => {
   const userId = req.params.userId;

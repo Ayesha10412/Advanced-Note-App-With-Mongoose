@@ -1,12 +1,15 @@
+import { Types } from "mongoose";
+
 export interface INote {
   title: string;
-  content: SVGStringList;
+  content: string;
   category: "personal" | "work" | "study" | "other";
   pinned: boolean;
   tags: {
     label: string;
     color: string;
   };
+  user: Types.ObjectId;
 }
 export interface IUserNote {
   name: string;

@@ -42,6 +42,11 @@ const appSchema = new Schema<INote>(
       label: { type: String, required: true },
       color: { type: String, default: "Green" },
     },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );

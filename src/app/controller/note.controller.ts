@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import { appNoteSchema, Note, userNote } from "../models/note.models";
+import mongoose from "mongoose";
 export const noteRoutes = express.Router();
 noteRoutes.post("/create-note", async (req: Request, res: Response) => {
   const myNote = new Note({
@@ -27,24 +28,21 @@ noteRoutes.post("/create-userNote", async (req: Request, res: Response) => {
   });
 });
 //enum is a field of predefined list of options
-noteRoutes.post(
-  "/create-advanced-note",
-  async (req: Request, res: Response) => {
-    //approach1
-    const advancedNote = new appNoteSchema({
-      title: "Learning Node",
-      tags: {
-        label: "database",
-      },
-    });
-    await advancedNote.save();
-    res.status(201).json({
-      success: true,
-      message: "Advanced note created successfully.",
-      note: advancedNote,
-    });
-  }
-);
+noteRoutes.post("/create-advance-note", async (req: Request, res: Response) => {
+  //approach1
+  const advancedNote = new appNoteSchema({
+    title: "Learning Node",
+    tags: {
+      label: "database",
+    },
+  });
+  await advancedNote.save();
+  res.status(201).json({
+    success: true,
+    message: "Advanced note created successfully.",
+    note: advancedNote,
+  });
+});
 noteRoutes.post(
   "/create-advanced-note",
   async (req: Request, res: Response) => {
@@ -58,7 +56,7 @@ noteRoutes.post(
   }
 );
 noteRoutes.get("/", async (req: Request, res: Response) => {
-  const notes = await appNoteSchema.find();
+  const notes = await appNoteSchema.find().populate("user");
   res.status(201).json({
     success: true,
     message: "Advanced note created successfully.",
