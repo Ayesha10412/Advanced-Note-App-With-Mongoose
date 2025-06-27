@@ -9,6 +9,11 @@ const CreateUserZodSchema = z.object({
   email: z.string(),
   password: z.string(),
   role: z.string().optional(),
+  address: z.object({
+    city: z.string(),
+    street: z.string(),
+    zip: z.number(),
+  }),
 });
 
 userRoutes.post("/create-user", async (req: Request, res: Response) => {

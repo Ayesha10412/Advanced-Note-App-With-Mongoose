@@ -1,5 +1,20 @@
 import { model, Schema } from "mongoose";
-import { IUser } from "../interfaces/user.interfaces";
+import { IAddress, IUser } from "../interfaces/user.interfaces";
+
+const addressSchema = new Schema<IAddress>(
+  {
+    city: {
+      type: String,
+    },
+    street: {
+      type: String,
+    },
+    zip: {
+      type: Number,
+    },
+  },
+  { _id: false }
+);
 
 const userSchema = new Schema<IUser>(
   {
@@ -39,6 +54,7 @@ const userSchema = new Schema<IUser>(
       },
       default: "user",
     },
+    address: { type: addressSchema },
   },
   { versionKey: false, timestamps: true }
 );
