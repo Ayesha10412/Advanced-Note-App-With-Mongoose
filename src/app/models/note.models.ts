@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-import { INote } from "../interfaces/notes.interfaces";
-
+import { INote, IUserNote } from "../interfaces/notes.interfaces";
+import validator from "validator";
 const noteSchema = new Schema(
   {
     title: String,
@@ -10,10 +10,13 @@ const noteSchema = new Schema(
 );
 
 export const Note = mongoose.model("Note", noteSchema);
-const userSchema = new Schema(
+const userSchema = new Schema<IUserNote>(
   {
     name: String,
-    email: String,
+    email: {
+      type: String,
+      validate: [validator.isEmail, "Invalid email {VALUE}"],
+    },
     createdAt: {
       type: Date,
       default: Date.now,

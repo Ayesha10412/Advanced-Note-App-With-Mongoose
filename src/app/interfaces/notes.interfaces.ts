@@ -8,3 +8,10 @@ export interface INote {
     color: string;
   };
 }
+export interface IUserNote {
+  name: string;
+  email: string;
+  createdAt: {
+    type: Date;
+  };
+}

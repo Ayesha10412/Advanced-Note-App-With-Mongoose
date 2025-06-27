@@ -7,19 +7,17 @@ noteRoutes.post("/create-note", async (req: Request, res: Response) => {
     content: "I am learning Mongoose.",
   });
   await myNote.save();
-  res
-    .status(201)
-    .json({
-      success: true,
-      message: "Note created successfully!",
-      note: myNote,
-    });
+  res.status(201).json({
+    success: true,
+    message: "Note created successfully!",
+    note: myNote,
+  });
 });
 
 noteRoutes.post("/create-userNote", async (req: Request, res: Response) => {
   const user = new userNote({
-    name: "Ayesha",
-    email: "ayesha@gmail.com",
+    name: "Bristi",
+    email: "bristi@gmail.com",
   });
   await user.save();
   res.status(201).json({
