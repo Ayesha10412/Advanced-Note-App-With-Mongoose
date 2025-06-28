@@ -30,8 +30,8 @@ userRoutes.post("/create-user", async (req: Request, res: Response) => {
     // await user.save();
 
     //built in and static methods
-    const password = await User.hashPassword(body.password);
-    body.password = password;
+    // const password = await User.hashPassword(body.password);
+    // body.password = password;
     const user = await User.create(body);
 
     res
@@ -67,7 +67,7 @@ userRoutes.patch("/:userId", async (req: Request, res: Response) => {
 });
 userRoutes.delete("/:userId", async (req: Request, res: Response) => {
   const userId = req.params.userId;
-  const user = await User.findByIdAndDelete(userId);
+  const user = await User.findOneAndDelete({ _id: userId });
   res
     .status(201)
     .json({ success: true, message: "User created Successfully", user });
