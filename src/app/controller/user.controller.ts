@@ -43,10 +43,29 @@ userRoutes.post("/create-user", async (req: Request, res: Response) => {
   }
 });
 userRoutes.get("/", async (req: Request, res: Response) => {
-  const user = await User.find();
+  //   const userEmail = req.query.email ? req.query.email : "";
+  //   const user = await User.find();
+  let users = [];
+  //filtering
+
+  //   if (userEmail) {
+  //     users = await User.find({ email: userEmail });
+  //   } else {
+  //     users = await User.find();
+  //   }
+
+  //sorting
+  //   users = await User.find().sort({ email: "asc" });
+
+  //skipping
+  //   users = await User.find().skip(7);
+
+  //limiting
+  users = await User.find().limit(2);
+
   res
     .status(201)
-    .json({ success: true, message: "User created Successfully", user });
+    .json({ success: true, message: "User created Successfully", users });
 });
 userRoutes.get("/:userId", async (req: Request, res: Response) => {
   const userId = req.params.userId;
