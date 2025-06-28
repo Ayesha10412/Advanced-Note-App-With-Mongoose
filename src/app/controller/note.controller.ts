@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express";
 import { appNoteSchema, Note, userNote } from "../models/note.models";
-import mongoose from "mongoose";
 export const noteRoutes = express.Router();
 noteRoutes.post("/create-note", async (req: Request, res: Response) => {
   const myNote = new Note({
@@ -29,7 +28,7 @@ noteRoutes.post("/create-userNote", async (req: Request, res: Response) => {
 });
 //enum is a field of predefined list of options
 noteRoutes.post("/create-advance-note", async (req: Request, res: Response) => {
-  //approach1
+  //   approach1;
   const advancedNote = new appNoteSchema({
     title: "Learning Node",
     tags: {
